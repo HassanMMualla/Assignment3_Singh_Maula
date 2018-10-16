@@ -4,6 +4,7 @@ public class Director extends Manager {
 
   // private instance variables
   private String department;
+  private static double benefit;
 
   // final instance variables
   private static final double TAX_PER_FOR_SALARY_BELOW_30000 = 0.1;
@@ -21,20 +22,30 @@ public class Director extends Manager {
     this.department = department;
   }
 
+  /**
+   * Set benefit to given value
+   * todo move this to the main corp class
+   */
+  protected static void setBenefit(double benefit) {
+    Director.benefit = benefit;
+  }
+
 
   /**
    * Get Director's gross salary
    */
-  protected double getGrossSalary() {
-    double grossSalary = super.getGrossSalary();
-    return grossSalary + Reusax.getBenefit();
+  protected double getGrossSalary() 
+  { 
+	double grossSalary = super.getGrossSalary();
+    return grossSalary + benefit;
   }
 
 
   /**
    * Return Director's net salary
    */
-  protected double getNetSalary() {
+  protected double getNetSalary() 
+  {
     double grossSalary = this.getGrossSalary();
 
     if (grossSalary >= MIN_LIMIT && grossSalary < MAX_LIMIT) {
@@ -52,10 +63,10 @@ public class Director extends Manager {
    */
   public String toString() {
     return "ID: " + getId() + " (" + this.department.toUpperCase() + ")-(Position: Director)" + END_OF_LINE +
-        "Name: " + getName() + END_OF_LINE +
-        "Gross Salary: " + this.getGrossSalary() + " SEK" + END_OF_LINE +
-        "Net Salary: " + this.getNetSalary() + " SEK" + END_OF_LINE +
-        "Degree: " + getDegree().toUpperCase() + END_OF_LINE +
-        "Benefit: " + Reusax.getBenefit();
+           "Name: " + getName() + END_OF_LINE +
+           "Gross Salary: " + this.getGrossSalary() + " SEK" + END_OF_LINE +
+           "Net Salary: " + this.getNetSalary() + " SEK" + END_OF_LINE +
+           "Degree: " + getDegree().toUpperCase() + END_OF_LINE +
+           "Benefit: " + benefit;
   }
 }

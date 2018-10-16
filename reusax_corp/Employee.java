@@ -12,12 +12,11 @@ public class Employee {
 
 
   // initialize an employee
-  public Employee(String id, String name, double grossSalary) {
+  public Employee(String name, String id, double grossSalary) {
     this.id = id;
     this.name = name;
     this.grossSalary = grossSalary;
   }
-
 
   /**
    * Return Employee's ID
