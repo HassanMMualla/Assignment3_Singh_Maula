@@ -140,10 +140,11 @@ public class Reusax {
     Employee employee = findEmployee(ID);
 
     if (employee != null) {
-      if (employee instanceof Employee) {
+      if (!((employee instanceof Manager) || (employee instanceof Intern))) {
         return employee.getName() + " is already a regular employee.";
       } else {
-        employeesList.add(employee);
+        Employee newEmployee = (Employee) employee;
+        employeesList.add(newEmployee);
         employeesList.remove(employee);
         return "success";
       }

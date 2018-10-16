@@ -3,7 +3,7 @@ package reusax_corp;
 public class Manager extends Employee {
 
   // private instance variables
-  protected String degree;
+  private String degree;
   private double bonusPercentage;
 
   // final values for bonus percentages depending on degree
@@ -21,6 +21,7 @@ public class Manager extends Employee {
 
   /**
    * Return Manager's degree
+   * @return String
    */
   protected String getDegree() {
     return this.degree;
@@ -29,6 +30,7 @@ public class Manager extends Employee {
 
   /**
    * Set Manager's degree and bonus percentage depending on the degree
+   * @param degree New value for degree
    */
   protected void setDegree(String degree) {
     if (degree.equalsIgnoreCase("bsc")) {
@@ -46,6 +48,7 @@ public class Manager extends Employee {
 
   /**
    * Return Manager's gross salary with bonus percentage
+   * @return double
    */
   protected double getGrossSalary() {
     double grossSalary = super.getGrossSalary();
@@ -55,6 +58,7 @@ public class Manager extends Employee {
 
   /**
    * Return Employee's netSalary depending on tax percentage
+   * @return double
    */
   protected double getNetSalary() {
     return (this.getGrossSalary() - (TAX_PER * this.getGrossSalary()));
@@ -63,13 +67,14 @@ public class Manager extends Employee {
 
   /**
    * A string representation of 'Manager' object
+   * @return String
    */
   public String toString() {
     return "ID: " + getId() + " (Position: Manager)" + END_OF_LINE +
-        "Name: " + getName() +  END_OF_LINE +
-        "Gross Salary: " + this.getGrossSalary() + " SEK" + END_OF_LINE +
-        "Net Salary: " + this.getNetSalary() + " SEK" + END_OF_LINE +
-        "Degree: " + this.degree.toUpperCase() + END_OF_LINE +
-        "Bonus Percentage: " + this.bonusPercentage;
+           "Name: " + getName() +  END_OF_LINE +
+           "Gross Salary: " + this.getGrossSalary() + " SEK" + END_OF_LINE +
+           "Net Salary: " + this.getNetSalary() + " SEK" + END_OF_LINE +
+           "Degree: " + this.degree.toUpperCase() + END_OF_LINE +
+           "Bonus Percentage: " + this.bonusPercentage;
   }
 }

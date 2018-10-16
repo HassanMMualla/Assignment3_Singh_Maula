@@ -1,5 +1,6 @@
 package reusax_corp;
 
+
 public class Director extends Manager {
 
   // private instance variables
@@ -16,7 +17,7 @@ public class Director extends Manager {
 
 
   // initialize instance variables
-  public Director(String name, String id, double grossSalary, String degree, String department) {
+  public Director(String id, String name, double grossSalary, String degree, String department) {
     super(id, name, grossSalary, degree);
     this.department = department;
   }
@@ -24,15 +25,17 @@ public class Director extends Manager {
 
   /**
    * Get Director's gross salary
+   * @return double
    */
   protected double getGrossSalary() {
     double grossSalary = super.getGrossSalary();
-    return grossSalary + Reusax.getBenefit();
+    return grossSalary + ReusaxCorp.directorBenefit;
   }
 
 
   /**
    * Return Director's net salary
+   * @return double
    */
   protected double getNetSalary() {
     double grossSalary = this.getGrossSalary();
@@ -49,13 +52,14 @@ public class Director extends Manager {
 
   /**
    * A string representation of 'Director' object
+   * @return String
    */
   public String toString() {
     return "ID: " + getId() + " (" + this.department.toUpperCase() + ")-(Position: Director)" + END_OF_LINE +
-        "Name: " + getName() + END_OF_LINE +
-        "Gross Salary: " + this.getGrossSalary() + " SEK" + END_OF_LINE +
-        "Net Salary: " + this.getNetSalary() + " SEK" + END_OF_LINE +
-        "Degree: " + getDegree().toUpperCase() + END_OF_LINE +
-        "Benefit: " + Reusax.getBenefit();
+           "Name: " + getName() + END_OF_LINE +
+           "Gross Salary: " + this.getGrossSalary() + " SEK" + END_OF_LINE +
+           "Net Salary: " + this.getNetSalary() + " SEK" + END_OF_LINE +
+           "Degree: " + getDegree().toUpperCase() + END_OF_LINE +
+           "Benefit: " + ReusaxCorp.directorBenefit;
   }
 }

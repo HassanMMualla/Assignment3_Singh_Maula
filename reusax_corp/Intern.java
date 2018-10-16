@@ -1,46 +1,75 @@
 package reusax_corp;
 
-public class Intern extends Employee{
+public class Intern extends Employee {
 
-	//Encapsulated Attributes
-	private int GPA;
+  // private instance variable
+  private int gpa;
 
-	//Constants for GPA Logic
-	static final int goodGPA = 5;
-	static final int excellentGPA = 8;
-	static final int benefit = 1000;
-	static final int noSalary = 0;
+  // constant for the Intern
+  private static final int MIN_GPA = 0;
+  private static final int MAX_GPA = 10;
+  private static final int bonusForGoodGPA = 1000;
 
 
-	//Constructor for class Intern
-	public Intern(String id, String name, double grossSalary, int GPA) {
-		super(id, name, grossSalary);
-		this.GPA = GPA;
-	}
+  // initialize instance variables
+  public Intern(String id, String name, double grossSalary, int gpa) {
+    super(id, name, grossSalary);
 
-	public double getGrossSalary() {
-		return this.grossSalary;
-	}
-	
-	public double getGrossSalaryWithGPA() {
-		double newSalary = noSalary;
-		if (this.GPA >= excellentGPA) {
-			newSalary = this.grossSalary + benefit;
-		} else if ( this.GPA > goodGPA ) {
-			newSalary = this.grossSalary;
-		}			 
-		return newSalary;
-	}
+    // limit GPA between 0-10
+    if (gpa < MIN_GPA) {
+      IO.printL("GPA can't be negative, defaulting to " + MIN_GPA);
+      this.gpa = MIN_GPA;
+    } else if (gpa > MAX_GPA) {
+      IO.printL("GPA can't be more than " + MAX_GPA + ", defaulting to " + MAX_GPA);
+      this.gpa = MAX_GPA;
+    } else {
+      this.gpa = gpa;
+    }
+  }
 
-	public int getGPA() {
-		return this.GPA;
-	}
 
-	public String toString() {
-		String allInfo = "ID: " + getId() + "(Position: Intern)" + END_OF_LINE +
-		           "Name: " + getName() + END_OF_LINE +
-		           "Gross/Net Salary: " + getGrossSalaryWithGPA() + " SEK" + END_OF_LINE +
-		           "GPA: " + getGPA() + END_OF_LINE ;
-		return allInfo;
-	}
+  /**
+   * Change Intern's GPA
+   * @param gpa New value for GPA
+   */
+  protected void setGpa(int gpa) {
+    this.gpa = gpa;
+  }
+
+
+  /**
+   * Return gross salary as per gpa
+   * @return double
+   */
+  protected double getGrossSalary() {
+    if (gpa >= 5 && gpa < 8) {
+      return super.getGrossSalary();
+    } else if (gpa >= 8) {
+      return super.getGrossSalary() + bonusForGoodGPA;
+    } else {
+      return 0;
+    }
+  }
+
+
+  /**
+   * Return net salary
+   * @return double
+   */
+  protected double getNetSalary() {
+    return this.getGrossSalary();
+  }
+
+
+  /**
+   * A String representation of Intern's object
+   * @return String
+   */
+  public String toString() {
+    return "ID: " + getId() + " (Position: Intern)" + END_OF_LINE +
+           "Name: " + getName() + END_OF_LINE +
+           "Gross Salary: " + this.getGrossSalary() + " SEK" + END_OF_LINE +
+           "Net Salary: " + this.getNetSalary() + " SEK" + END_OF_LINE +
+           "GPA: " + this.gpa;
+  }
 }
