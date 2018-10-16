@@ -262,5 +262,22 @@ public class Reusax {
 
 	protected static void setBenefit(double benefit) {
 		Reusax.benefit = benefit;
-	}
+  }
+
+
+  private void sortBy(String sortBy, String sortOrder) {
+
+    if (sortBy.equalsIgnoreCase("name") && sortOrder.equalsIgnoreCase("ascending")) {
+      employees.sort(CompareEmployees.compareByName);
+    }
+    if (sortBy.equalsIgnoreCase("name") && sortOrder.equalsIgnoreCase("descending")) {
+      employees.sort(CompareEmployees.compareByName.reversed());
+    }
+    if (sortBy.equalsIgnoreCase("net salary") && sortOrder.equalsIgnoreCase("ascending")) {
+      employees.sort(CompareEmployees.compareByNetSalary);
+    }
+    if (sortBy.equalsIgnoreCase("net salary") && sortOrder.equalsIgnoreCase("descending")) {
+      employees.sort(CompareEmployees.compareByNetSalary.reversed());
+    }
+  }
 }
