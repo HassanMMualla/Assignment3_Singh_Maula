@@ -1,5 +1,6 @@
 package reusax_corp;
 
+// todo implement the setter for setBenefit() in company class
 public class Menu {
 	
 	//constants for the menu
@@ -134,7 +135,8 @@ public class Menu {
 			 	
 			 	case PROMOTE_TO_EMPLOYEE:
 			 		ID = findID();
-			 		dataBase.promoteToEmployee(ID);
+			 		status = dataBase.promoteToEmployee(ID);
+          System.out.println(status);
 			 		break;
 			 		
 			 	case PROMOTE_TO_INTERN:

@@ -13,7 +13,7 @@ public class Intern extends Employee{
 
 
 	//Constructor for class Intern
-	public Intern(String name, String id, double grossSalary, int GPA) {
+	public Intern(String id, String name, double grossSalary, int GPA) {
 		super(id, name, grossSalary);
 		this.GPA = GPA;
 	}
