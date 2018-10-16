@@ -2,161 +2,161 @@ package reusax_corp;
 
 import java.util.ArrayList;
 
-public class Reusax{
-	
-	//Attribute for the class Reusax
-	private ArrayList <Employee> employeesList;
-	
-	public Reusax(){
-		this.employeesList = new ArrayList< Employee >();
-	}
-	
-	public String newEmployee(String name, String ID, double grossSalary) {			
-		boolean flag = IdDubplicateChecker(ID);	
-		if(! (employeesList.isEmpty()))	
-			if ( flag )
-					return "error";
-		Employee newEmployee = new Employee(name, ID, grossSalary);
-		employeesList.add(newEmployee);
-		return "Employee is successfully created";
-	}
-	
-	public String newDirector(String name, String ID, double grossSalary, String degree, String department) {
-		boolean flag = IdDubplicateChecker(ID);
-		if(! (employeesList.isEmpty()))	
-			if ( flag )
-					return "error";
-		Employee newDirector = new Director(name, ID, grossSalary, degree, department);
-		employeesList.add(newDirector);
-		return "Director successfully created";
-	}
-	
-	public String newManager(String name, String ID, double grossSalary, String degree) {
-		boolean flag = IdDubplicateChecker(ID);
-		if(! (employeesList.isEmpty()))	
-			if ( flag )
-					return "error";
-		Employee newManager = new Manager(name, ID, grossSalary, degree);
-		employeesList.add(newManager);
-		return "Manager is successfully created";
-	}
+public class Reusax {
 
-	public String newIntern(String name, String ID, double grossSalary, int GPA) 
-	{
-		boolean flag = IdDubplicateChecker(ID);
-		if(! (employeesList.isEmpty()))	
-			if ( flag )
-					return "error";
-		Employee newIntern = new Intern(name, ID, grossSalary, GPA);
-		employeesList.add(newIntern);
-		return "Intern student successfully created";
-	}
+  //Attribute for the class Reusax
+  private ArrayList<Employee> employeesList;
 
-	public Employee findEmployee(String ID) {
-			for (Employee foundEmployee: employeesList) {
-				if ( foundEmployee.getId().equals(ID) && ! foundEmployee.equals(null))
-					return foundEmployee;
-			}
-		return null;
-	}
+  // benefit for the director
+  private static double benefit;
 
-	public String removeEmployee(String ID)
-	{
-		if (checkIfListIsEmpty())
-			return "empty";
-		if (! IdDubplicateChecker(ID))
-			return "error";
-		Employee employee = findEmployee(ID);
-		employeesList.remove(employee);
-		return "Employee removed";
-	}
+  public Reusax() {
+    this.employeesList = new ArrayList<Employee>();
+  }
 
-	public String retrieveEmployee(String ID) 
-	{		
-		Employee employee = null;
-		if (checkIfListIsEmpty()) 
-			return "empty";
-		if (! IdDubplicateChecker(ID))
-			return "error";
-		for (Employee foundEmployee : employeesList)
-			if (foundEmployee.getId().equals(ID))
-				employee = foundEmployee;
-		String retrievedEmployee = employee.toString();
-			return retrievedEmployee; 
-	}
-	
-	public String updateEmployee(String ID, int whatToUpdate, String name, double grossSalary) 
-	{
-		name ="";
-		grossSalary = 1;
-		if (checkIfListIsEmpty()) 
-			return "empty";
-		if (! IdDubplicateChecker(ID))
-			return "error";
-		Employee employee = findEmployee(ID);
-		if (employee.equals(null))
-			return "error";
-		if (whatToUpdate == 1) 
-		{
-			employee.setName(name);
-			return "success";
-		}
-		if (whatToUpdate == 2) {
-			employee.setGrossSalary(grossSalary);
-			return "success";
-		}
-	return "error";
-	}
-	
-	public double calculateTotalGross() 
-	{
-		if (checkIfListIsEmpty()) 
-			return -1;
-		double sumOfGross = 0;
-		for (Employee anEmployee : employeesList) {
-			if (! anEmployee.equals(null)) {
-				sumOfGross += anEmployee.getGrossSalary();
-			}	
-		}
-		return sumOfGross;
-	}
-	
-	public double calculateTotalNet() 
-	{
-		if (checkIfListIsEmpty()) {
-			return -1;
-		}
-		double sumOfNet = 0;
-		for (Employee anEmployee : employeesList) {
-			if (! anEmployee.equals(null)) {
-				sumOfNet += anEmployee.getNetSalary();
-			}
-				
-		}
-		return sumOfNet;
-	}
-	
-	public String promoteToEmployee(String ID) 
-	{
-		
-		if (checkIfListIsEmpty())
-			return "empty";
-		if (! IdDubplicateChecker(ID))
-			return "error";
-		Employee employee = findEmployee(ID);
-		Employee newEmployee = (Employee) employee;
-		employeesList.add(newEmployee);
-		employeesList.remove(employee);
-		
-		return "success";
+  public String newEmployee(String name, String ID, double grossSalary) {
+    boolean flag = IdDubplicateChecker(ID);
+    if (!(employeesList.isEmpty()))
+      if (flag)
+        return "error";
+    Employee newEmployee = new Employee(ID, name, grossSalary);
+    employeesList.add(newEmployee);
+    return "Employee is successfully created";
+  }
+
+  public String newDirector(String name, String ID, double grossSalary, String degree, String department) {
+    boolean flag = IdDubplicateChecker(ID);
+    if (!(employeesList.isEmpty()))
+      if (flag)
+        return "error";
+    Employee newDirector = new Director(ID, name, grossSalary, degree, department);
+    employeesList.add(newDirector);
+    return "Director successfully created";
+  }
+
+  public String newManager(String ID, String name, double grossSalary, String degree) {
+    boolean flag = IdDubplicateChecker(ID);
+    if (!(employeesList.isEmpty()))
+      if (flag)
+        return "error";
+    Employee newManager = new Manager(ID, name, grossSalary, degree);
+    employeesList.add(newManager);
+    return "Manager is successfully created";
+  }
+
+  public String newIntern(String name, String ID, double grossSalary, int GPA) {
+    boolean flag = IdDubplicateChecker(ID);
+    if (!(employeesList.isEmpty()))
+      if (flag)
+        return "error";
+    Employee newIntern = new Intern(ID, name, grossSalary, GPA);
+    employeesList.add(newIntern);
+    return "Intern student successfully created";
+  }
+
+  public Employee findEmployee(String ID) {
+    for (Employee foundEmployee : employeesList) {
+      if (foundEmployee.getId().equals(ID))
+        return foundEmployee;
+    }
+    return null;
+  }
+
+  public String removeEmployee(String ID) {
+    if (checkIfListIsEmpty())
+      return "empty";
+    if (!IdDubplicateChecker(ID))
+      return "error";
+    Employee employee = findEmployee(ID);
+    employeesList.remove(employee);
+    return "Employee removed";
+  }
+
+  public String retrieveEmployee(String ID) {
+    Employee employee = null;
+    if (checkIfListIsEmpty())
+      return "empty";
+    if (!IdDubplicateChecker(ID))
+      return "error";
+    for (Employee foundEmployee : employeesList)
+      if (foundEmployee.getId().equals(ID))
+        employee = foundEmployee;
+    String retrievedEmployee = employee.toString();
+    return retrievedEmployee;
+  }
+
+  public String updateEmployee(String ID, int whatToUpdate, String name, double grossSalary) {
+
+    if (checkIfListIsEmpty())
+      return "empty";
+    if (!IdDubplicateChecker(ID))
+      return "error";
+    Employee employee = findEmployee(ID);
+    if (employee.equals(null))
+      return "error";
+    if (whatToUpdate == 1) {
+      employee.setName(name);
+      return "success";
+    }
+    if (whatToUpdate == 2) {
+      employee.setGrossSalary(grossSalary);
+      return "success";
+    }
+    return "error";
+  }
+
+  public double calculateTotalGross() {
+    if (checkIfListIsEmpty())
+      return -1;
+    double sumOfGross = 0;
+    for (Employee anEmployee : employeesList) {
+      if (!anEmployee.equals(null)) {
+        sumOfGross += anEmployee.getGrossSalary();
+      }
+    }
+    return sumOfGross;
+  }
+
+  public double calculateTotalNet() {
+    if (checkIfListIsEmpty()) {
+      return -1;
+    }
+    double sumOfNet = 0;
+    for (Employee anEmployee : employeesList) {
+      if (!anEmployee.equals(null)) {
+        sumOfNet += anEmployee.getNetSalary();
+      }
+
+    }
+    return sumOfNet;
+  }
+
+  public String promoteToEmployee(String ID) {
+
+    if (checkIfListIsEmpty())
+      return "empty";
+//		if (!IdDubplicateChecker(ID))
+//			return "error";
+    Employee employee = findEmployee(ID);
+
+    if (employee != null) {
+      if (employee instanceof Employee) {
+        return employee.getName() + " is already a regular employee.";
+      } else {
+        employeesList.add(employee);
+        employeesList.remove(employee);
+        return "success";
+      }
+    }
+    return "Error";
 	}
 	
 	public String promoteToIntern(String ID, int gpa) 
 	{
 		if (checkIfListIsEmpty())
 			return "empty";
-		if ( ! IdDubplicateChecker(ID))
-			return "error";
+//		if ( ! IdDubplicateChecker(ID))
+//			return "error";
 		Employee employee = findEmployee(ID);
 		String currentEmployeeType = determineEmployeeType(employee);
 		if (currentEmployeeType.equals("Intern"))
@@ -173,8 +173,8 @@ public class Reusax{
 	{
 		if (checkIfListIsEmpty())
 			return "empty";
-		if (!IdDubplicateChecker(ID))
-			return "error";
+//		if (!IdDubplicateChecker(ID))
+//			return "error";
 		Employee employee = findEmployee(ID);
 		String currentEmployeeType = determineEmployeeType(employee);
 		if (currentEmployeeType.equals("Manager"))
@@ -195,8 +195,8 @@ public class Reusax{
 	public String promoteToDirector(String ID, String degree, String department) {
 		if (checkIfListIsEmpty())
 			return "empty";
-		if (IdDubplicateChecker(ID))
-			return "error";
+//		if (IdDubplicateChecker(ID))
+//			return "error";
 		Employee employee = findEmployee(ID);
 		String currentEmployeeType = determineEmployeeType(employee);
 		if (currentEmployeeType.equals("Director"))
@@ -241,8 +241,8 @@ public class Reusax{
 		if (foundEmployee instanceof Manager) 
 			return "Manager";
 		if (foundEmployee instanceof Intern)
-			return "Intern"; 
-		return "normal employee";	
+			return "Intern";
+		return "normal employee";
 	}
 	
 	public boolean IdDubplicateChecker(String id)
@@ -252,5 +252,14 @@ public class Reusax{
 				return true;
 		}
 		return false;
+	}
+
+
+	public static double getBenefit() {
+		return benefit;
+	}
+
+	protected static void setBenefit(double benefit) {
+		Reusax.benefit = benefit;
 	}
 }
